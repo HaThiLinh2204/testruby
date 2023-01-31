@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
- # before_action :set_book, only: %i[ show edit update destroy ]
+before_action :set_book, only: %i[ show edit update destroy ]
 before_action :authenticate_user!
   # GET /books or /books.json
   def index
@@ -25,6 +25,7 @@ before_action :authenticate_user!
 
     respond_to do |format|
       if @book.save
+        @book.image.attach(params[:book][:image])
         format.html { redirect_to book_url(@book), notice: "Book was successfully created." }
         format.json { render :show, status: :created, location: @book }
       else
