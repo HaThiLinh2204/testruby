@@ -10,6 +10,10 @@
   <%= @book.number_of_pages %>
 </p>
 <p>
+  <strong>Detail:</strong>
+  <%= @book.detail %>
+</p>
+<p>
   <%= image_tag @book.image, width: "200" %>
 </p>
 <h2>Review Form</h2>
@@ -18,6 +22,15 @@
     <%= form.text_area:review %>
     <%= form.hidden_field :book_id, :value => @book.id %>
  </div>
+ <h2>Review List</h2>
+ <ul>
+     <% @book.book_review.each do |book_review| %>
+     <li>
+         <%= book_review.review %>
+         (<i><%= book_review.user_id %></i>)
+     </li>
+     <% end %>
+ </ul>
  <div class="actions">
      <%= form.submit %>
  </div>
